@@ -17,6 +17,7 @@ class App  extends Component {
   componentDidMount(){
     this.getAllItems();
   }
+  // not yet tested 
   getUser = async (event) => {
     var res = await axios (`https://localhost:44394/api/user/${event}`)
     return(
@@ -26,7 +27,7 @@ class App  extends Component {
     )
   }
 
-
+// not tested yet
   getShoppingCart = async (event) => {
     var res = await axios (`https://localhost:44394/api/shoppingcart/${event}`)
     return(
@@ -36,9 +37,9 @@ class App  extends Component {
     )
   }
 
+  // we recieved a 200 code with the merch items from Db
   getAllItems = async () => {
     var res = await axios (`https://localhost:44394/api/merches`)
-    console.log(res);
     return(
       this.setState({
         items: res.data
