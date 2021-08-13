@@ -3,6 +3,12 @@ import './App.css';
 import TitleBar from './TitleBar/titlebar';
 import ShoppingCart from './ShoppingCart/shoppingCart';
 import axios from 'axios';
+import Login from './Login/login';
+import NavBar from './NavBar/navbar';
+import Register from './Register/register';
+import Home from './Home/home';
+import { BrowserRouter, Route } from 'react-router-dom';
+
 
 class App  extends Component {
   constructor(props) {
@@ -52,10 +58,16 @@ class App  extends Component {
 render() {
   return (
     <React.Fragment>
-      <TitleBar />
+      <BrowserRouter>
+        <NavBar/>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component={Register}></Route>
+      </BrowserRouter>
+      {/* <TitleBar /> */}
       <ShoppingCart/>
+
       
-      <h1>Our React App</h1>
     </React.Fragment>
   );
 }
