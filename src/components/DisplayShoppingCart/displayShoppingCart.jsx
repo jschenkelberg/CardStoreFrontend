@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DisplayMerch = (props) => {
+const DisplayShoppingCart = (props) => {
     return (
         <React.Fragment>
-            <h1>This is the displayMerch table</h1>
+            <h1>This is the displayShoppingCart table - it is broken</h1>
             <table>
                 <thead>
                     <tr></tr>
@@ -19,10 +19,10 @@ const DisplayMerch = (props) => {
                 </thead>
                 <tbody>
                     {
-                        props.items.map((item) => {
+                        props.shoppingCart.map((item) => {
                             return(
                                 <tr>
-                                    <td>{item.name}</td>
+                                    <td>{item.userId}</td>
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>
                                     <td>{item.price}</td>
@@ -38,4 +38,4 @@ const DisplayMerch = (props) => {
     );
 }
  
-export default DisplayMerch;
+export default DisplayShoppingCart;

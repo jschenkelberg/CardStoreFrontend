@@ -1,9 +1,9 @@
 import React,{Component} from 'react';
 import './App.css';
 import TitleBar from './TitleBar/titlebar';
-import ShoppingCart from './ShoppingCart/shoppingCart';
 import axios from 'axios';
 import DisplayMerch from './DisplayMerch/displayMerch';
+import DisplayShoppingCart from './DisplayShoppingCart/displayShoppingCart';
 
 class App  extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class App  extends Component {
 
   componentDidMount(){
     this.getAllItems();
+    this.getShoppingCart();
   }
   // not yet tested 
   getUser = async (event) => {
@@ -29,11 +30,12 @@ class App  extends Component {
   }
 
 // not tested yet
-  getShoppingCart = async (event) => {
-    var res = await axios (`https://localhost:44394/api/shoppingcart/${event}`)
+  getShoppingCart = async () => {
+    var res = await axios (`https://localhost:44394/api/shoppingcart/3310cf10-8093-4a7b-84f3-327232cc5a7b`)
+    var tempShoppingCart = res.data
     return(
       this.setState({
-        shoppingCart: res.data
+        shoppingCart: tempShoppingCart
       })
     )
   }
@@ -54,10 +56,11 @@ class App  extends Component {
 
 render() {
   //console.log(this.state.items)
+  console.log(this.state.shoppingCart)
   return (
     <React.Fragment>
       <TitleBar />
-      <ShoppingCart/>
+      <DisplayShoppingCart shoppingCart={this.state.shoppingCart}/>
       <DisplayMerch items={this.state.items}/>
       <h1>Our React App</h1>
     </React.Fragment>

@@ -5,4 +5,9 @@ import App from './components/App';
 const jsxElement = <h1>Our React App</h1>;
 console.log(jsxElement);
 
-reactDom.render(<Router><App /></Router>, document.getElementById('root'));
+reactDom.render(
+    <Router>
+    <App />
+    </Router>,
+     document.getElementById('root')
+     );
