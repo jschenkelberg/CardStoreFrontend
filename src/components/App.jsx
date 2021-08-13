@@ -4,6 +4,8 @@ import TitleBar from './TitleBar/titlebar';
 import ShoppingCart from './ShoppingCart/shoppingCart';
 import axios from 'axios';
 import MerchForm from './merchForm/merchForm';
+import ReviewForm from './reviewForm/reviewForm';
+
 
 class App  extends Component {
   constructor(props) {
@@ -56,6 +58,7 @@ render() {
       <TitleBar />
       <ShoppingCart/>
       <MerchForm />
+      <ReviewForm />
       <h1>Our React App</h1>
     </React.Fragment>
   );

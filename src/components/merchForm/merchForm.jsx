@@ -25,25 +25,17 @@ class MerchForm extends Component {
     })
     .catch(err => console.log(err))
     
-  };
-
-    // handleChange = (event) =>{
-    //     this.setState ({
-    //         [event.target.name]:event.target.value
-            
-            
-    //     });        
-    // }
+  };    
 
     handleChange = event => {
         const { value, type } = event.target;
     
         this.setState ({
           [event.target.name]: type === "number" ? parseFloat(value) : event.target.value
-        });
-    
-            
+        });                
     };
+
+    
 
     handleSubmit = (event) => {
         event.preventDefault();
