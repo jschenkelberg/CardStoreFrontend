@@ -32,7 +32,7 @@ const Login = (props) => {
         </div>
         <div className="form-floating">
           <input
-            type="password"
+            type="Password"
             className="form-control"
             id="floatingPassword"
             placeholder="Password"

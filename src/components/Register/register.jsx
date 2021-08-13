@@ -21,75 +21,75 @@ const Register = (props) => {
 
           <div className="form-floating">
             <input
-              name="firstName"
+              name="FirstName"
               type="string"
               className="form-control"
               placeholder="John"
               required
               onChange={handleChange}
-              values={values.firstName}
+              values={values.FirstName}
             />
-            {console.log(values.firstName)}
+            {console.log(values.FirstName)}
             <label for="floatingInput">First Name </label>
           </div>
           <div className="form-floating">
             <input
-              name="lastName"
+              name="LastName"
               type="string"
               className="form-control"
               placeholder="Doe"
               onChange={handleChange}
-              values={values.lastName}
+              values={values.LastName}
             />
-            {console.log(values.lastName)}
+            {console.log(values.LastName)}
             <label for="floatingPassword">Last Name</label>
           </div>
           <div className="form-floating">
             <input
-              name="userName"
+              name="UserName"
               type="string"
               className="form-control"
               placeholder="John123"
               onChange={handleChange}
-              values={values.userName}
+              values={values.UserName}
             />
-            {console.log(values.userName)}
+            {console.log(values.UserName)}
             <label for="floatingInput">User Name</label>
           </div>
           <div className="form-floating">
             <input
-              name="password"
-              type="password"
+              name="Password"
+              type="string"
               className="form-control"
               placeholder="112234344rrttyyuu"
               onChange={handleChange}
-              values={values.password}
+              values={values.Password}
             />
-            {console.log(values.password)}
+            {console.log(values.Password)}
             <label for="floatingInput">Password</label>
           </div>
           <div className="form-floating">
             <input
-              name="email"
+              name="Email"
               type="string"
               className="form-control"
               placeholder="name@example.com"
               onChange={handleChange}
-              values={values.email}
+              values={values.Email}
             />
-            {console.log(values.email)}
+            {console.log(values.Email)}
             <label for="floatingInput">Email address</label>
           </div>
           <div className="form-floating">
             <input
-              name="phoneNumber"
+              name="PhoneNumber"
               type="string"
               className="form-control"
               placeholder="555-555-5555"
               onChange={handleChange}
-              values={values.phoneNumber}
+              values={values.PhoneNumber}
             />
-            {console.log(values.phoneNumber)}
+            {console.log(values.PhoneNumber)}
             <label for="floatingInput">Phone Number</label>
           </div>
           <button className="w-10 btn btn-lg btn-primary" type="submit">
