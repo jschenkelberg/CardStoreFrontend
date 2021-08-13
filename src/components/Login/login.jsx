@@ -23,12 +23,12 @@ const Login = (props) => {
 
         <div className="form-floating">
           <input
-            type="email"
+            type="User Name"
             className="form-control"
             id="floatingInput"
-            placeholder="name@example.com"
+            placeholder="John123456"
           />
-          <label for="floatingInput">Email address</label>
+          <label for="floatingInput">User Name</label>
         </div>
         <div className="form-floating">
           <input
