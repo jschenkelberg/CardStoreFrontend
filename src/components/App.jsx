@@ -78,7 +78,7 @@ class App extends Component {
     ); 
   this.setState({
     user:res.data
-  }) }
+  }); console.log(res.data)}
 
   render() {
     const user = this.state.user;
