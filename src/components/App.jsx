@@ -7,37 +7,36 @@ import Login from "./Login/login";
 import NavBar from "./NavBar/navbar";
 import Register from "./Register/register";
 import Home from "./Home/home";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import jwtDecode, { InvalidTokenError } from "jwt-decode";
 
 class App extends Component {
   constructor(props) {
-    localStorage.setItem("token", responseData.token);
-    const tokenFromStorage = localStorage.getItem("token");
-    localStorage.removeItem("token");
+    // localStorage.setItem("token", resData.token);
+    // const tokenFromStorage = localStorage.getItem("token");
+    // localStorage.removeItem("token");
     super(props);
     this.state = {
-      user: [],
+      user: "",
       shoppingCart: [],
       items: [],
-      token:'',
     };
   }
-
-
-
-  componentDidMount() {   
-    const jwt = localStorage.getItem('token');
-    try{
+  componentDidMount() {
+    const jwt = localStorage.getItem("token");
+    try {
       const user = jwtDecode(jwt);
       this.setState({
-        user
+        user,
       });
-    }catch{
-
-    }
-    this.getAllItems();
+    } catch {}
   }
+
   getUser = async (event) => {
     var res = await axios.get(`https://localhost:44394/api/user/${event}`);
     return this.setState({
@@ -46,7 +45,9 @@ class App extends Component {
   };
 
   getShoppingCart = async (event) => {
-    var res = await axios.get(`https://localhost:44394/api/shoppingcart/${event}`);
+    var res = await axios.get(
+      `https://localhost:44394/api/shoppingcart/${event}`
+    );
     return this.setState({
       shoppingCart: res.data,
     });
@@ -61,27 +62,54 @@ class App extends Component {
   };
 
   newUser = async (event) => {
-    var res = await axios.post(`https://localhost:44394/api/authentication`,event);
+    var res = await axios.post(
+      `https://localhost:44394/api/authentication`,
+      event
+    );
     console.log(res);
     return this.setState({
       user: res.data,
-      
     });
-    
   };
 
-  delete;
+  getUser = async (event) =>{
+    var res = await axios.post(
+      `https://localhost:44394/api/authentication/login`, event
+    ); 
+  this.setState({
+    user:res.data
+  }) }
+
   render() {
+    const user = this.state.user;
     return (
       <React.Fragment>
-        <Router>
-          <NavBar />
+        <NavBar />
+        <Switch>
+          {/* <route path ='/profile' render ={props => {
+            if (!user){
+              return <Redirect to='/login'/>;
+            }else{
+              return <ProfileScreen{...props} user={user}/>
+            }
+          }}
+        /> */}
           <Route path="/" exact component={Home}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/register" render={ props => <Register{...props}   newUser={this.newUser}/>} />
-        </Router>
-        {/* <TitleBar /> */}
-        <ShoppingCart />
+
+          <Route
+            path="/login"
+            render={(props) => <Login {...props} getUser={this.getUser} />}
+          />
+
+          <Route
+            path="/register"
+            render={(props) => <Register {...props} newUser={this.newUser} />}
+          />
+
+          {/* <TitleBar /> */}
+          <ShoppingCart />
+          <Redirect to="not-found" />
+        </Switch>
       </React.Fragment>
     );
   }
