@@ -21,7 +21,8 @@ const DisplayMerch = (props) => {
                     {
                         props.items.map((item) => {
                             return(
-                                <tr>
+                                //may need to rename key, temp name 
+                                <tr key={item.merchId}>
                                     <td>{item.name}</td>
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>

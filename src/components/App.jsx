@@ -10,8 +10,10 @@ class App  extends Component {
       super(props);
       this.state = {
         user: [],
-        shoppingCart: [],
-        items: []
+        shoppingCart: [], // by user Id
+        items: [],
+        filterProductId: [],
+        userId: "3310cf10-8093-4a7b-84f3-327232cc5a7b",
       }
   }
 
@@ -29,7 +31,7 @@ class App  extends Component {
     )
   }
 
-// not tested yet
+// tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
   getShoppingCart = async () => {
     var res = await axios (`https://localhost:44394/api/shoppingcart/3310cf10-8093-4a7b-84f3-327232cc5a7b`)
     var tempShoppingCart = res.data
@@ -39,6 +41,7 @@ class App  extends Component {
       })
     )
   }
+
 
   // we recieved a 200 code with the merch items from Db
   getAllItems = async () => {
@@ -57,10 +60,11 @@ class App  extends Component {
 render() {
   //console.log(this.state.items)
   console.log(this.state.shoppingCart)
+  console.log(this.state.filterProductId)
   return (
     <React.Fragment>
       <TitleBar />
-      <DisplayShoppingCart shoppingCart={this.state.shoppingCart}/>
+      <DisplayShoppingCart shoppingCart={this.state.shoppingCart} items={this.state.items}/>
       <DisplayMerch items={this.state.items}/>
       <h1>Our React App</h1>
     </React.Fragment>

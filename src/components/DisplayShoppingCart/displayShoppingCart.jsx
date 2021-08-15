@@ -21,9 +21,9 @@ const DisplayShoppingCart = (props) => {
                     {
                         props.shoppingCart.map((item) => {
                             return(
-                                <tr>
+                                <tr key={item.merchId}>
                                     <td>{item.userId}</td>
-                                    <td>{item.category}</td>
+                                    <td>{item.merchId}</td>
                                     <td>{item.description}</td>
                                     <td>{item.price}</td>
                                     <td>not done</td>
