@@ -18,7 +18,7 @@ class MerchForm extends Component {
 
   addMerch = async (merch) => {
     const jwt = localStorage.getItem("token");
-    const response = await axios
+    const res = await axios
       .post(`https://localhost:44394/api/merches`, merch,{
         headers: { Authorization: "Bearer " + jwt },
       })

@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 import jwtDecode, { InvalidTokenError } from "jwt-decode";
 import MerchForm from "./merchForm/merchForm";
+import ReviewForm from "./reviewForm/reviewForm";
 
 class App extends Component {
   constructor(props) {
@@ -108,6 +109,7 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <MerchForm userid={this.getUserInfo}/>
+        <ReviewForm userid={this.getUserInfo} />
         <Switch>
           {/* <route path ='/register' render ={props => {
             if (!user){

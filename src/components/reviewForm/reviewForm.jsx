@@ -7,8 +7,8 @@ class ReviewForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userid:"970a39dd-1a58-40e4-bbc4-07280f3532ae", 
-            merchid: 1,
+            userid:"", 
+            merchid: 2,
             userreview: '',
             rating: ''
         }          
@@ -20,11 +20,12 @@ class ReviewForm extends Component {
 
     // need to add logic to pass merchid, userid into form along with user input
      addReview = async (review) => {
-   await  axios.post(
-      `https://localhost:44394/api/review`,
-     review
-    ).then(res => {
-        console.log(res)
+        const jwt =localStorage.getItem("token");
+        const res = await axios.post(`https://localhost:44394/api/review`,
+     review, {headers: { Authorization: "Bearer " + jwt },
+   })
+     .then(res => {
+        console.log(res);
         // this.props.getMerch(merchId)
     })
     .catch(err => console.log(err))    
