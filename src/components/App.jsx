@@ -14,35 +14,40 @@ import {
   Switch,
 } from "react-router-dom";
 import jwtDecode, { InvalidTokenError } from "jwt-decode";
+import MerchForm from "./merchForm/merchForm";
 
 class App extends Component {
   constructor(props) {
-    // localStorage.setItem("token", resData.token);
-    // const tokenFromStorage = localStorage.getItem("token");
-    // localStorage.removeItem("token");
+    //localStorage.setItem("token", resData.token);
+    const tokenFromStorage = localStorage.getItem("token");
+    localStorage.removeItem("token");
     super(props);
     this.state = {
       user: "",
       shoppingCart: [],
       items: [],
+      userid: ""
     };
   }
   componentDidMount() {
     const jwt = localStorage.getItem("token");
     try {
-      const user = jwtDecode(jwt);
-      this.setState({
-        user,
-      });
+      const user = jwtDecode(jwt);      
+      this.setState({user});     
+      console.log(user.id);
     } catch {}
+    
+  
   }
 
-  getUser = async (event) => {
-    var res = await axios.get(`https://localhost:44394/api/user/${event}`);
-    return this.setState({
-      user: res.data,
-    });
-  };
+  
+
+  // getUser = async (event) => {
+  //   var res = await axios.get(`https://localhost:44394/api/user/${event}`);
+  //   return this.setState({
+  //     user: res.data,
+  //   });
+  // };
 
   getShoppingCart = async (event) => {
     var res = await axios.get(
@@ -73,28 +78,45 @@ class App extends Component {
     });
   };
 
-  getUser = async (event) =>{
+  getUser = async (event) =>{    
     var res = await axios.post(
       `https://localhost:44394/api/authentication/login`, event
-    ); 
+    );
+    let token = res.data.token;
+    localStorage.setItem('token', token);
+    console.log(res.data.token);
+    this.getUserInfo();     
   this.setState({
     user:res.data
   }); console.log(res.data)}
+
+  getUserInfo = async (event) => {
+    const jwt = localStorage.getItem('token');
+    var response = await axios.get(
+      `https://localhost:44394/api/examples/user`, {headers: {Authorization: 'Bearer ' + jwt}});
+      console.log(response.data);
+      this.setState({
+        userid: response.data.id
+      })
+  }
+  
+
 
   render() {
     const user = this.state.user;
     return (
       <React.Fragment>
         <NavBar />
+        <MerchForm userid={this.getUserInfo}/>
         <Switch>
-          {/* <route path ='/profile' render ={props => {
+          {/* <route path ='/register' render ={props => {
             if (!user){
               return <Redirect to='/login'/>;
             }else{
-              return <ProfileScreen{...props} user={user}/>
+              return <Home{...props} user={user}/>
             }
-          }}
-        /> */}
+          }} */}
+        {/* /> */}
           <Route path="/" exact component={Home}></Route>
 
           <Route
