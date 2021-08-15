@@ -56,6 +56,7 @@ class App  extends Component {
   }
 
     // shopping cart functions 
+    // add item to cart with "add to cart button"
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
       if (response === undefined){
@@ -66,6 +67,16 @@ class App  extends Component {
             cart: response.data
         });
         }
+    }
+
+    // delete item in cart by id "remove from cart" button
+    deleteFromCart = async (id) => {
+      try{
+        await axios.delete(`https://localhost:44394/api/cart/remove/${id}/`)
+      }
+      catch(err) {
+        console.log(err);
+      }
     }
 
   
