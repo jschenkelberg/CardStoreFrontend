@@ -9,16 +9,15 @@ import ReviewForm from './reviewForm/reviewForm';
 
 class App  extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        user: [],
-        shoppingCart: [],
-        items: []
-      }
-  }
-
-  componentDidMount(){
-    this.getAllItems();
+    //localStorage.setItem("token", resData.token);
+    const tokenFromStorage = localStorage.getItem("token");
+    //localStorage.removeItem("token");
+    super(props);
+    this.state = {
+      user: "",
+      shoppingCart: [],
+      items: [],
+    };
   }
   getUser = async (event) => {
     var res = await axios (`https://localhost:44394/api/user/${event}`)

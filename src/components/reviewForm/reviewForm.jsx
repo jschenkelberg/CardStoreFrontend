@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './reviewForm.css'
 import axios from 'axios';
-import 'react-dropdown-now/style.css';
+
 
 class ReviewForm extends Component {
     constructor(props) {
