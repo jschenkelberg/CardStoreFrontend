@@ -55,6 +55,19 @@ class App  extends Component {
     );
   }
 
+    // shopping cart functions 
+    createCart = async (cart) => {
+      let response = await axios.post('https://localhost:44394/api/cart', cart);
+      if (response === undefined){
+            this.setState({
+            });
+        }else{
+          this.setState({
+            cart: response.data
+        });
+        }
+    }
+
   
 
 render() {
