@@ -57,7 +57,7 @@ class App  extends Component {
 
     // shopping cart functions 
     // add item to cart with "add to cart button"
-    createCart = async (cart) => {
+    addToCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
       if (response === undefined){
             this.setState({
@@ -89,7 +89,7 @@ render() {
     <React.Fragment>
       <TitleBar />
       <DisplayShoppingCart shoppingCart={this.state.shoppingCart} items={this.state.items}/>
-      <DisplayMerch items={this.state.items}/>
+      <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
       <h1>Our React App</h1>
     </React.Fragment>
   );

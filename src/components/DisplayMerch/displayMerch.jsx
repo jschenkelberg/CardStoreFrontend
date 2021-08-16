@@ -29,6 +29,9 @@ const DisplayMerch = (props) => {
                                     <td>{item.price}</td>
                                     <td>not done</td>
                                     <td>not done</td>
+                                    <td>
+                                        <button onClick={() => props.addToCart(item)}>Add to Cart</button>
+                                    </td>
                                 </tr>
                             )
                         })
