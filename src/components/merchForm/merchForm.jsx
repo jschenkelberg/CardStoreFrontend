@@ -15,6 +15,7 @@ class MerchForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
 
   addMerch = async (merch) => {
     const jwt = localStorage.getItem("token");

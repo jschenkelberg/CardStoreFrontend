@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useForm from "../UseForm/useForm";
+import useForm from "../UseForm/useFormRating";
 
 const Register = (props) => {
   const { values, handleChange, handleSubmit } = useForm(create);
