@@ -8,11 +8,9 @@ const NavBar = (props) => {
         <div className="container-fluid">
           <ul className="navbar-nav  ">
             <li className="nav-item">
-              
-                <Link to="/" className="nav-link active">
-                  Home
-                </Link>
-              
+              <Link to="/" className="nav-link active">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/login" className="nav-link active">
@@ -23,6 +21,11 @@ const NavBar = (props) => {
             <li className="nav-item">
               <Link to="/register" className="nav-link active">
                 Register
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/logout" className="nav-link active">
+                Log Out
               </Link>
             </li>
           </ul>
