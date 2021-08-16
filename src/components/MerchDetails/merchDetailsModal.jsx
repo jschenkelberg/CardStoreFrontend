@@ -45,11 +45,7 @@ const MerchDetails = (props) => {
         <h2>Add Review</h2>
         <br />
         <div className="form-group">
-        <input
-        onChange={handleChange}
-        name="merchId"
-        value={props.item.merchId} 
-        />
+               
         <input
           type="text"
           name="userreview"
