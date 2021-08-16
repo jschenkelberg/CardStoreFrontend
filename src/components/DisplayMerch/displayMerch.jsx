@@ -12,8 +12,6 @@ const DisplayMerch = (props) => {
                     <th>Category</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Reviews</th>
-                    <th>Raiting</th>
                     </tr>
                     <tr></tr>
                 </thead>
@@ -27,10 +25,11 @@ const DisplayMerch = (props) => {
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>
                                     <td>{item.price}</td>
-                                    <td>not done</td>
-                                    <td>not done</td>
                                     <td>
                                         <button onClick={() => props.addToCart(item)}>Add to Cart</button>
+                                    </td>
+                                    <td>
+                                        {/* </td><button onClick={() => props.} */}
                                     </td>
                                 </tr>
                             )

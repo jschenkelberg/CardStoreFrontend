@@ -19,6 +19,8 @@ import ReviewForm from "./reviewForm/reviewForm";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import MerchModal from "./Modal/Modal";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
+import DisplayMerch from "./DisplayMerch/displayMerch";
+import MerchDetails from "./MerchDetails/merchDetails";
 
 class App extends Component { 
   constructor(props) {
@@ -35,6 +37,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    this.getAllItems();
     const jwt = localStorage.getItem("token");
     try {
       const user = jwtDecode(jwt);      
@@ -46,25 +49,29 @@ class App extends Component {
 
 
 // tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
+getAllItems = async () => {
+  var res = await axios (`https://localhost:44394/api/merches`)
+  var tempItem = res.data
+  //console.log(tempItem)
+  return(
+    this.setState({
+      items: tempItem
+    })
+  );
+}
+
+
+  // we recieved a 200 code with the merch items from Db
   getShoppingCart = async () => {
     var res = await axios (`https://localhost:44394/api/shoppingcart/3310cf10-8093-4a7b-84f3-327232cc5a7b`)
     var tempShoppingCart = res.data
+  
     return(
       this.setState({
         shoppingCart: tempShoppingCart
       })
     )
   }
-
-
-  // we recieved a 200 code with the merch items from Db
-  getAllItems = async () => {
-    var res = await axios.get(`https://localhost:44394/api/merches`);
-    console.log(res);
-    return this.setState({
-      items: res.data,
-    });
-  };
 
   newUser = async (event) => {
     try{
@@ -106,26 +113,43 @@ class App extends Component {
         userid: response.data.id
       })
   }
+  // moved from reviewForm
+  addReview = async (review) => {
+    const jwt =localStorage.getItem("token");
+    const res = await axios.post(`https://localhost:44394/api/review`,
+ review, {headers: { Authorization: "Bearer " + jwt },
+})
+ .then(res => {
+    console.log(res);
+    // this.props.getMerch(merchId)
+})
+.catch(err => console.log(err))    
+};           
 
-  addMerch = async (event) => {
-    const jwt = localStorage.getItem("token");
-    const res = await axios.post(
-      `https://localhost:44394/api/merches`, event,{
-        headers: { Authorization: "Bearer " + jwt },
-      })
-      .then((res) => {
-        console.log(res);
+  // this is also in merchForm, this was coppied to the modal version
+  // addMerch = async (event) => {
+  //   const jwt = localStorage.getItem("token");
+  //   const res = await axios.post(
+  //     `https://localhost:44394/api/merches`, event,{
+  //       headers: { Authorization: "Bearer " + jwt },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
       
-        // this.props.getMerch(merchId)
-        
-      })     
-      // .catch((err) => console.log(err));
-  };
+  //       // this.props.getMerch(merchId)
+  //     }) 
+          
+  //     // .catch((err) => console.log(err));
+  // };
 
   // shopping cart functions 
     // add item to cart with "add to cart button"
     addToCart = async (cart) => {
-      let response = await axios.post('https://localhost:44394/api/cart', cart);
+      const jwt = localStorage.getItem("token");
+      let response = await axios.post('https://localhost:44394/api/shoppingcart', cart, {
+        headers: { Authorization: "Bearer " + jwt },
+      });
+      console.log(response);
       if (response === undefined){
             this.setState({
             });
@@ -162,9 +186,11 @@ class App extends Component {
           }} */}
         {/* /> */}
           <Route path="/" exact component={Home}>
-          <MerchForm userid={this.getUserInfo}/>
-          <ReviewForm userid={this.getUserInfo} />
+          <MerchForm userid={this.getUserInfo} getAllItems={this.getAllItems}/>
+          {/* <ReviewForm userid={this.getUserInfo} /> */}
+          <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
           <MerchModal />
+          <MerchDetails />
           </Route>
 
           <Route
