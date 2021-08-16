@@ -20,6 +20,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import MerchModal from "./Modal/Modal";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 import DisplayMerch from "./DisplayMerch/displayMerch";
+import MerchDetails from "./MerchDetails/merchDetails";
 
 class App extends Component { 
   constructor(props) {
@@ -186,9 +187,10 @@ getAllItems = async () => {
         {/* /> */}
           <Route path="/" exact component={Home}>
           <MerchForm userid={this.getUserInfo} getAllItems={this.getAllItems}/>
-          <ReviewForm userid={this.getUserInfo} />
+          {/* <ReviewForm userid={this.getUserInfo} /> */}
           <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
           <MerchModal />
+          <MerchDetails />
           </Route>
 
           <Route
