@@ -19,6 +19,7 @@ import ReviewForm from "./reviewForm/reviewForm";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import MerchModal from "./Modal/Modal";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
+import DisplayMerch from "./DisplayMerch/displayMerch";
 
 class App extends Component { 
   constructor(props) {
@@ -58,13 +59,15 @@ class App extends Component {
 
 
   // we recieved a 200 code with the merch items from Db
-  getAllItems = async () => {
-    var res = await axios.get(`https://localhost:44394/api/merches`);
-    console.log(res);
-    return this.setState({
-      items: res.data,
-    });
-  };
+  getShoppingCart = async () => {
+    var res = await axios (`https://localhost:44394/api/shoppingcart/3310cf10-8093-4a7b-84f3-327232cc5a7b`)
+    var tempShoppingCart = res.data
+    return(
+      this.setState({
+        shoppingCart: tempShoppingCart
+      })
+    )
+  }
 
   newUser = async (event) => {
     try{
@@ -164,6 +167,7 @@ class App extends Component {
           <Route path="/" exact component={Home}>
           <MerchForm userid={this.getUserInfo}/>
           <ReviewForm userid={this.getUserInfo} />
+          <DisplayMerch items={this.state.items}/>
           <MerchModal />
           </Route>
 
