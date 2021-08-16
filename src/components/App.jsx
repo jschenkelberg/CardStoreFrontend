@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import TitleBar from "./TitleBar/titlebar";
-import ShoppingCart from "./ShoppingCart/shoppingCart";
 import axios from "axios";
 import Login from "./Login/login";
 import NavBar from "./NavBar/navbar";
@@ -19,6 +18,7 @@ import MerchForm from "./merchForm/merchForm";
 import ReviewForm from "./reviewForm/reviewForm";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import MerchModal from "./Modal/Modal";
+import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 
 class App extends Component { 
   constructor(props) {
@@ -178,7 +178,7 @@ class App extends Component {
           />
 
           {/* <TitleBar /> */}
-          <ShoppingCart />
+          <DisplayShoppingCart />
           <Redirect to="not-found" />
         </Switch>
       </React.Fragment>
