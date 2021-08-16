@@ -39,6 +39,7 @@ class App extends Component {
       redirect:null,
     };
   }
+  
   componentDidMount() {
     this.getAllItems();
     this.getAllReviews();
@@ -60,6 +61,11 @@ getAllReviews = async () => {
     })
   );
 }
+
+// filterReviews = this.reviews
+//   .filter(function (review){
+//     return review.merchid == this.reviews.merchid)
+
   // tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
   getAllItems = async () => {
     var res = await axios(`https://localhost:44394/api/merches`);
