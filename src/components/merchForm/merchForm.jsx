@@ -26,7 +26,7 @@ class MerchForm extends Component {
         console.log(res);
       
         // this.props.getMerch(merchId)
-        
+        this.props.getAllItems()
       })     
       .catch((err) => console.log(err));
   };
