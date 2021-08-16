@@ -4,11 +4,13 @@ import useForm from "../UseForm/useForm";
 
 const Register = (props) => {
   const { values, handleChange, handleSubmit } = useForm(create);
+  const [ redirect, setRedirect] = useState(false);
   function create() {
     props.newUser(values);
     console.log(values);
+    setRedirect(true);
   }
-
+  
   return (
     <div>
       <div>

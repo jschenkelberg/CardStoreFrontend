@@ -3,10 +3,12 @@ import './reviewForm.css'
 import axios from 'axios';
 
 
+
 class ReviewForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isOpen: false,
             userid:"", 
             merchid: 2,
             userreview: '',
@@ -18,7 +20,7 @@ class ReviewForm extends Component {
 
 
 
-    // need to add logic to pass merchid, userid into form along with user input
+    // need to add logic to pass merchid into form along with user input
      addReview = async (review) => {
         const jwt =localStorage.getItem("token");
         const res = await axios.post(`https://localhost:44394/api/review`,
@@ -31,13 +33,6 @@ class ReviewForm extends Component {
     .catch(err => console.log(err))    
   };    
 
-    // handleChange = event => {
-    //     const { value, type } = event.target;
-    
-    //     this.setState ({
-    //       [event.target.name]: type === "number" ? parseInt(value, 10) : event.target.value
-    //     });                
-    // };
     handleChange = (event) =>{
         this.setState ({
             [event.target.name]: event.target.value
@@ -60,9 +55,10 @@ class ReviewForm extends Component {
 
 
     render() { 
-        return ( 
+        return (
+             
         <div className="center">
-      
+ 
         <form className="form-inline" onSubmit={this.handleSubmit}>
         <h2>Add Review</h2>
         <br />
@@ -75,7 +71,6 @@ class ReviewForm extends Component {
           onChange={this.handleChange}
           value={this.state.userreview}
         />
-
              
                 <select className="custom-select custom-select-lg" value={this.state.rating} type="text" name="rating" onChange={this.handleChange}>
                     <option>Star Rating</option>
@@ -85,11 +80,7 @@ class ReviewForm extends Component {
                     <option value="4">4-Above Average</option>
                     <option value="5">5-Excellent</option>
                 </select>
-            </div>
-
-
-
- 
+            </div> 
 
         <button type="submit"> Submit </button>
       </form>

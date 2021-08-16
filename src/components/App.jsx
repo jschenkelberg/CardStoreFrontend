@@ -12,14 +12,18 @@ import {
   Redirect,
   Route,
   Switch,
+  useHistory,
 } from "react-router-dom";
 import jwtDecode, { InvalidTokenError } from "jwt-decode";
 import MerchForm from "./merchForm/merchForm";
 import ReviewForm from "./reviewForm/reviewForm";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import MerchModal from "./Modal/Modal";
 
-class App extends Component {
+class App extends Component { 
   constructor(props) {
     //localStorage.setItem("token", resData.token);
+    
     const tokenFromStorage = localStorage.getItem("token");
     localStorage.removeItem("token");
     super(props);
@@ -36,19 +40,10 @@ class App extends Component {
       const user = jwtDecode(jwt);      
       this.setState({user});     
       console.log(user.id);
-    } catch {}
-    
-  
+    } catch {}      
   }
-
   
 
-  // getUser = async (event) => {
-  //   var res = await axios.get(`https://localhost:44394/api/user/${event}`);
-  //   return this.setState({
-  //     user: res.data,
-  //   });
-  // };
 
   getShoppingCart = async (event) => {
     var res = await axios.get(
@@ -69,14 +64,21 @@ class App extends Component {
   };
 
   newUser = async (event) => {
+    try{
     var res = await axios.post(
       `https://localhost:44394/api/authentication`,
-      event
-    );
+      event);
     console.log(res);
+    //setRedirect(true);
+  
     return this.setState({
       user: res.data,
     });
+        
+  }
+  catch(err){
+    alert(err);
+  }
   };
 
   getUser = async (event) =>{    
@@ -91,6 +93,7 @@ class App extends Component {
     user:res.data
   }); console.log(res.data)}
 
+
   getUserInfo = async (event) => {
     const jwt = localStorage.getItem('token');
     var response = await axios.get(
@@ -100,7 +103,21 @@ class App extends Component {
         userid: response.data.id
       })
   }
-  
+
+  addMerch = async (event) => {
+    const jwt = localStorage.getItem("token");
+    const res = await axios.post(
+      `https://localhost:44394/api/merches`, event,{
+        headers: { Authorization: "Bearer " + jwt },
+      })
+      .then((res) => {
+        console.log(res);
+      
+        // this.props.getMerch(merchId)
+        
+      })     
+      // .catch((err) => console.log(err));
+  };
 
 
   render() {
@@ -108,8 +125,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <MerchForm userid={this.getUserInfo}/>
-        <ReviewForm userid={this.getUserInfo} />
+        
         <Switch>
           {/* <route path ='/register' render ={props => {
             if (!user){
@@ -119,7 +135,11 @@ class App extends Component {
             }
           }} */}
         {/* /> */}
-          <Route path="/" exact component={Home}></Route>
+          <Route path="/" exact component={Home}>
+          <MerchForm userid={this.getUserInfo}/>
+          <ReviewForm userid={this.getUserInfo} />
+          <MerchModal />
+          </Route>
 
           <Route
             path="/login"

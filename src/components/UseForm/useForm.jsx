@@ -4,7 +4,7 @@ const useForm =(callback)=> {
 const [values, setValues]=useState({});
 const handleChange =(event)=> {
     event.persist();
-    setValues({...values,[event.target.name]: event.target.value});
+    setValues({...values,[event.target.name]: event.target.name === 'price' ? parseFloat(event.target.value) : event.target.value});
 
 }
 const handleSubmit =(event)=> {
