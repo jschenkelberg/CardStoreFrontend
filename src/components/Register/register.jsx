@@ -14,7 +14,7 @@ const Register = (props) => {
     
     
   }
-if(willRedirect==false){
+if(willRedirect===false){
   return (    
     <div>
       <div>
