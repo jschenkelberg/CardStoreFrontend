@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import useForm from '../UseForm/useForm';
 import axios from 'axios';
+import useFormRating from '../UseForm/useFormRating';
 
 
 
@@ -10,14 +10,15 @@ const MerchDetails = (props) => {
     const [show, setShow] = useState(false);  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
-    const{values, handleChange, handleSubmit} = useForm(merchDetails);
+    const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
         console.log(values);
     } 
 
-    const addReview = async (review) => {
+    const addReview = async () => {
       const jwt =localStorage.getItem("token");
+      const review={merchId:props.item.merchId, userReview: values.userreview, rating: values.rating}
       const res = await axios.post(`https://localhost:44394/api/review`,
    review, {headers: { Authorization: "Bearer " + jwt },
   })
@@ -44,7 +45,7 @@ const MerchDetails = (props) => {
         <h2>Add Review</h2>
         <br />
         <div className="form-group">
-        
+               
         <input
           type="text"
           name="userreview"

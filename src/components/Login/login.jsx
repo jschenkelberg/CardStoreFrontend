@@ -1,5 +1,5 @@
 import React from "react";
-import useForm from "../UseForm/useForm";
+import useForm from "../UseForm/useFormRating";
 
 
 

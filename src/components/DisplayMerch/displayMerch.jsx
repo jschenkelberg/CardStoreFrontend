@@ -1,4 +1,5 @@
 import React from 'react';
+import MerchDetails from '../MerchDetails/merchDetailsModal';
 
 const DisplayMerch = (props) => {
     return (
@@ -29,7 +30,7 @@ const DisplayMerch = (props) => {
                                         <button onClick={() => props.addToCart(item)}>Add to Cart</button>
                                     </td>
                                     <td>
-                                        {/* </td><button onClick={() => props.} */}
+                                    <MerchDetails item={item} />
                                     </td>
                                 </tr>
                             )

@@ -17,10 +17,10 @@ import jwtDecode, { InvalidTokenError } from "jwt-decode";
 import MerchForm from "./merchForm/merchForm";
 import ReviewForm from "./reviewForm/reviewForm";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MerchModal from "./Modal/Modal";
+import MerchModal from "./Modal/addItemModal";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 import DisplayMerch from "./DisplayMerch/displayMerch";
-import MerchDetails from "./MerchDetails/merchDetails";
+import MerchDetails from "./MerchDetails/merchDetailsModal";
 import Logout from "./Logout/logout";
 
 class App extends Component {
