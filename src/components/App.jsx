@@ -33,7 +33,8 @@ class App extends Component {
       user: "",
       shoppingCart: [],
       items: [],
-      userid: ""
+      userid: "",
+      redirect:null,
     };
   }
   componentDidMount() {
@@ -80,10 +81,10 @@ getAllItems = async () => {
       event);
     console.log(res);
     //setRedirect(true);
-  
-    return this.setState({
-      user: res.data,
-    });
+  return res.status;
+    // return this.setState({
+    //   user: res.data,
+    // });
         
   }
   catch(err){
@@ -101,6 +102,7 @@ getAllItems = async () => {
     this.getUserInfo();     
   this.setState({
     user:res.data
+    
   }); console.log(res.data)}
 
 
@@ -172,19 +174,13 @@ getAllItems = async () => {
 
   render() {
     const user = this.state.user;
+  
     return (
       <React.Fragment>
         <NavBar />
         
         <Switch>
-          {/* <route path ='/register' render ={props => {
-            if (!user){
-              return <Redirect to='/login'/>;
-            }else{
-              return <Home{...props} user={user}/>
-            }
-          }} */}
-        {/* /> */}
+      
           <Route path="/" exact component={Home}>
           <MerchForm userid={this.getUserInfo} getAllItems={this.getAllItems}/>
           {/* <ReviewForm userid={this.getUserInfo} /> */}
@@ -195,12 +191,12 @@ getAllItems = async () => {
 
           <Route
             path="/login"
-            render={(props) => <Login {...props} getUser={this.getUser} />}
+            render={(props) => <Login {...props} getUser={this.getUser}/>}
           />
 
           <Route
             path="/register"
-            render={(props) => <Register {...props} newUser={this.newUser} />}
+            render={(props) => <Register {...props} newUser={this.newUser} Redirect to="/login" /> }
           />
 
           {/* <TitleBar /> */}
