@@ -29,6 +29,9 @@ const MerchDetails = (props) => {
   .catch(err => console.log(err))    
   };           
 
+  const filterReviews
+
+
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -40,12 +43,33 @@ const MerchDetails = (props) => {
             <Modal.Title>Product Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div>
+            ID {props.item.merchId}
+            </div> 
+            <div>
+            Description {props.item.description}
+            </div>
+            <div>
+            Price ${props.item.price}
+          </div>
+          {/* {
+                        props.reviews.map((review) => {
+                            return(
+                                //may need to rename key, temp name 
+                                <tr key={review.merchId}>
+                                    <td>{review.userreview}</td>
+                                    <td>{review.rating}</td>                                 
+                                </tr>
+                            )
+                        })
+                    } */}
+
 
           <form className="form-inline" onSubmit={handleSubmit}>
-        <h2>Add Review</h2>
+        <h6>Add Review</h6>
         <br />
         <div className="form-group">
-               
+
         <input
           type="text"
           name="userreview"

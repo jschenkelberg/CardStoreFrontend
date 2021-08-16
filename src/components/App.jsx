@@ -34,11 +34,13 @@ class App extends Component {
       shoppingCart: [],
       items: [],
       userid: "",
+      reviews:[],
       redirect:null,
     };
   }
   componentDidMount() {
     this.getAllItems();
+    this.getAllReviews();
     const jwt = localStorage.getItem("token");
     try {
       const user = jwtDecode(jwt);      
@@ -61,6 +63,16 @@ getAllItems = async () => {
   );
 }
 
+getAllReviews = async () => {
+  var res = await axios (`https://localhost:44394/api/review`)
+  var tempItem = res.data
+  //console.log(tempItem)
+  return(
+    this.setState({
+      reviews: res.data
+    })
+  );
+}
 
   // we recieved a 200 code with the merch items from Db
   getShoppingCart = async () => {
