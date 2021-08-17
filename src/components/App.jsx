@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import TitleBar from "./TitleBar/titlebar";
 import axios from "axios";
 import Login from "./Login/login";
 import NavBar from "./NavBar/navbar";
@@ -17,16 +16,14 @@ import jwtDecode, { InvalidTokenError } from "jwt-decode";
 import AddCards from "./AddCards/addCards";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MerchModal from "./AddCards/addCards";
-import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 import DisplayMerch from "./DisplayMerch/displayMerch";
 import MerchDetails from "./MerchDetails/merchDetailsModal";
-import Logout from "./Logout/logout";
 import ShoppingCart from "./DisplayCartModal/displayCartModal";
+import Logout from "./Logout/logout";
+
 
 class App extends Component {
   constructor(props) {
-    //localStorage.setItem("token", resData.token);
-
     const tokenFromStorage = localStorage.getItem("token");
     localStorage.removeItem("token");
     super(props);
@@ -55,7 +52,6 @@ class App extends Component {
 
   getAllReviews = async () => {
     var res = await axios(`https://localhost:44394/api/review`);
-    //console.log(tempItem)
     return this.setState({
       reviews: res.data,
     });
@@ -68,17 +64,14 @@ class App extends Component {
     });
   };
 
-  // tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
   getAllItems = async () => {
     var res = await axios(`https://localhost:44394/api/merches`);
     var tempItem = res.data;
-    //console.log(tempItem)
     return this.setState({
       items: tempItem,
     });
   };
 
-  // we recieved a 200 code with the merch items from Db
   getShoppingCart = async () => {
     var res = await axios(
       `https://localhost:44394/api/shoppingcart/3310cf10-8093-4a7b-84f3-327232cc5a7b`
@@ -97,11 +90,7 @@ class App extends Component {
         event
       );
       console.log(res);
-      //setRedirect(true);
       return res.status;
-      // return this.setState({
-      //   user: res.data,
-      // });
     } catch (err) {
       alert(err);
     }
@@ -134,7 +123,7 @@ class App extends Component {
       userid: response.data.id,
     });
   };
-  // moved from reviewForm
+  
   addReview = async (review) => {
     const jwt = localStorage.getItem("token");
     const res = await axios
@@ -143,44 +132,30 @@ class App extends Component {
       })
       .then((res) => {
         console.log(res);
-        
       })
       .catch((err) => console.log(err));
   };
 
-  
-
-
-
-  // shopping cart functions
-  // add item to cart with "add to cart button"
   addToCart = async (cart) => {
     const jwt = localStorage.getItem("token");
-    let response = await axios.post(
-      "https://localhost:44394/api/shoppingcart",
-      cart,
-      {
+    let response = await axios
+      .post("https://localhost:44394/api/shoppingcart", cart, {
         headers: { Authorization: "Bearer " + jwt },
-      }
-      
-      )
+      })
       .then((res) => {
         console.log(res);
-        
       })
-      .catch((err) => alert("Already in your cart."));    
-   
+      .catch((err) => alert("Already in your cart."));
+
     if (response === undefined) {
       this.setState({});
     } else {
       this.setState({
         cart: response.data,
       });
-    
     }
   };
 
-  // delete item in cart by id "remove from cart" button
   deleteFromCart = async (id) => {
     try {
       await axios.delete(`https://localhost:44394/api/cart/remove/${id}/`);
@@ -200,22 +175,16 @@ class App extends Component {
       <React.Fragment>
         <NavBar isLoggedIn={this.state.isLoggedIn} />
         {this.state.isLoggedIn == false ? (
-          <Login getUser={this.getUser}/>
+          <Login getUser={this.getUser} />
         ) : (
           <Switch>
             <Route path="/" exact component={Home}>
-              {/* <MerchForm
-              userid={this.getUserInfo}
-              getAllItems={this.getAllItems}
-            /> */}
-              {/* <ReviewForm userid={this.getUserInfo} /> */}
               <DisplayMerch
                 items={this.state.items}
                 addToCart={this.addToCart}
               />
-              <AddCards getAllItems={this.getAllItems}/>
+              <AddCards getAllItems={this.getAllItems} />
               <ShoppingCart />
-              {/* <MerchDetails /> */}
             </Route>
 
             <Route
@@ -240,9 +209,6 @@ class App extends Component {
                 />
               )}
             />
-
-            
-            {/* <DisplayShoppingCart /> */}
             <Redirect to="not-found" />
           </Switch>
         )}
