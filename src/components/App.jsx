@@ -21,7 +21,6 @@ import MerchDetails from "./MerchDetails/merchDetailsModal";
 import ShoppingCart from "./DisplayCartModal/displayCartModal";
 import Logout from "./Logout/logout";
 
-
 class App extends Component {
   constructor(props) {
     const tokenFromStorage = localStorage.getItem("token");
@@ -123,7 +122,7 @@ class App extends Component {
       userid: response.data.id,
     });
   };
-  
+
   addReview = async (review) => {
     const jwt = localStorage.getItem("token");
     const res = await axios
@@ -175,27 +174,10 @@ class App extends Component {
       <React.Fragment>
         <NavBar isLoggedIn={this.state.isLoggedIn} />
         {this.state.isLoggedIn == false ? (
-          <Login getUser={this.getUser} />
-        ) : (
           <Switch>
-            <Route path="/" exact component={Home}>
-              <DisplayMerch
-                items={this.state.items}
-                addToCart={this.addToCart}
-              />
-              <AddCards getAllItems={this.getAllItems} />
-              <ShoppingCart />
-            </Route>
-
             <Route
               path="/login"
               render={(props) => <Login {...props} getUser={this.getUser} />}
-            />
-            <Route
-              path="/login"
-              render={(props) => (
-                <Logout {...props} logoutUser={this.logoutUser} />
-              )}
             />
 
             <Route
@@ -209,6 +191,17 @@ class App extends Component {
                 />
               )}
             />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Home}>
+              <DisplayMerch
+                items={this.state.items}
+                addToCart={this.addToCart}
+              />
+              <AddCards getAllItems={this.getAllItems} />
+              <ShoppingCart />
+            </Route>
             <Redirect to="not-found" />
           </Switch>
         )}
