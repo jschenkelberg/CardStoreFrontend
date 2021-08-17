@@ -11,6 +11,7 @@ const MerchDetails = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
     const [loadData, setLoadData] = useState(true)
+    const [reviewsById, setReviewsById] = useState([])
     const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
@@ -39,9 +40,7 @@ const MerchDetails = (props) => {
       var tempData=res.data;
       setLoadData(false)
       console.log(res);
-      return ({
-        reviewsById: tempData,
-      });
+      setReviewsById(res.data)
     };
   // });
   function callTwoThings(){
@@ -65,17 +64,43 @@ const MerchDetails = (props) => {
             <Modal.Title>Product Details</Modal.Title>
             
           </Modal.Header>
-          <Modal.Body>  
+          <Modal.Body> 
           <h4>Name: {props.item.name}</h4>
           <h4>Category: {props.item.category}</h4>
           <h4>Description: {props.item.description}</h4>
           <h4>Price: ${props.item.price}</h4> 
           <h4></h4>
+          <table className="table table-striped">
+            <thead>
+              <th>User Review</th>
+              <th>User Rating</th>
+            </thead>
+            <tbody>
+            {reviewsById.map((review) => {
+              return(
+                <tr key={review.merchId}>
+                  <td>{review.userreview}</td>
+                  <td>{review.rating}</td>
+                </tr>
+                )
+              })
+          }
+            </tbody>
+          </table>
           
-          {/* {productReviews.map((review) => {
+          
+
+          {/* <h4>Name: {props.item.name}</h4>
+          <h4>Category: {props.item.category}</h4>
+          <h4>Description: {props.item.description}</h4>
+          <h4>Price: ${props.item.price}</h4> 
+          <h4></h4>
+          
+          {reviewsById.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
                                     <td>{review.userreview}</td>
+                                     
                                     <td>{review.rating}</td>                                 
                                 </tr>
                             )
