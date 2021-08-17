@@ -14,9 +14,9 @@ import {
   useHistory,
 } from "react-router-dom";
 import jwtDecode, { InvalidTokenError } from "jwt-decode";
-
+import AddCards from "./AddCards/addCards";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MerchModal from "./Modal/addItemModal";
+import MerchModal from "./AddCards/addCards";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 import DisplayMerch from "./DisplayMerch/displayMerch";
 import MerchDetails from "./MerchDetails/merchDetailsModal";
@@ -162,14 +162,21 @@ class App extends Component {
       {
         headers: { Authorization: "Bearer " + jwt },
       }
-    );
-    console.log(response);
+      
+      )
+      .then((res) => {
+        console.log(res);
+        
+      })
+      .catch((err) => alert("Already in your cart."));    
+   
     if (response === undefined) {
       this.setState({});
     } else {
       this.setState({
         cart: response.data,
       });
+    
     }
   };
 
@@ -206,7 +213,7 @@ class App extends Component {
                 items={this.state.items}
                 addToCart={this.addToCart}
               />
-              <MerchModal />
+              <AddCards getAllItems={this.getAllItems}/>
               <ShoppingCart />
               {/* <MerchDetails /> */}
             </Route>

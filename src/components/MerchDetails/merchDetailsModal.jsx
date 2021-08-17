@@ -31,7 +31,7 @@ const MerchDetails = (props) => {
       console.log(res);
       // this.props.getMerch(merchId)
   })
-  .catch(err => console.log(err))    
+  .catch(err => alert("You can only review the item once."))    
   };
   
   // useEffect(() => {
@@ -45,6 +45,7 @@ const MerchDetails = (props) => {
   // });
   function callTwoThings(){
     handleShow();
+    getReviewsById();
   }
   useEffect(() => {
     getReviewsById();

@@ -1,18 +1,19 @@
 import React from 'react';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import useForm from '../UseForm/useForm';
+import useFormPrice from '../UseForm/useFormPrice';
 import axios from 'axios';
 
 
 
-const MerchModal = (props) => {
+const AddCards = (props) => {
     const [show, setShow] = useState(false);  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
-    const{values, handleChange, handleSubmit} = useForm(merchForm);
+    const{values, handleChange, handleSubmit} = useFormPrice(merchForm);
     function merchForm() {
         addMerch(values);
+        props.getAllItems();                
         console.log(values);
     }
     
@@ -23,12 +24,13 @@ const MerchModal = (props) => {
             headers: { Authorization: "Bearer " + jwt },
           })
           .then((res) => {
-            console.log(res);          
-           // this.props.getMerch(merchId)            
+            console.log(res);
+          
+            // this.props.getMerch(merchId)
+            
           })     
-          .catch((err) => console.log(err));
+          .catch((err) => alert(err));
       };
-
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -100,4 +102,4 @@ const MerchModal = (props) => {
   }
 
 
-  export default MerchModal;
+  export default AddCards;
