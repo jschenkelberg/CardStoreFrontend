@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import axios from 'axios';
@@ -15,6 +15,8 @@ const MerchDetails = (props) => {
         addReview(values);
         console.log(values);
     } 
+    
+ 
 
     const addReview = async () => {
       const jwt =localStorage.getItem("token");
@@ -27,8 +29,17 @@ const MerchDetails = (props) => {
       // this.props.getMerch(merchId)
   })
   .catch(err => console.log(err))    
-  };           
-
+  };
+  
+  // useEffect(() => {
+    const getReviewsbyId = async () => {
+      var res = await axios(`https://localhost:44394/api/review/${props.item.merchid}`);
+      console.log(res);
+      return this.setState({
+        reviewsById: res.data,
+      });
+    };
+  // });
  
 
     return (
@@ -43,8 +54,8 @@ const MerchDetails = (props) => {
             
           </Modal.Header>
           <Modal.Body>    
-          <Button onClick ={props.getReviewById}>
-          {/* {props.reviewsById.map((review) => {
+          <Button onClick={props.getReviewsById}>
+          {/* {this.reviewsById.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
                                     <td>{review.userreview}</td>
