@@ -209,10 +209,10 @@ getReviewsbyId = async (merchid) => {
 
         <Switch>
           <Route path="/" exact component={Home}>
-            <MerchForm
+            {/* <MerchForm
               userid={this.getUserInfo}
               getAllItems={this.getAllItems}
-            />
+            /> */}
             {/* <ReviewForm userid={this.getUserInfo} /> */}
             <DisplayMerch items={this.state.items} addToCart={this.addToCart} />
             <MerchModal />

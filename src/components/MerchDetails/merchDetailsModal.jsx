@@ -13,6 +13,7 @@ const MerchDetails = (props) => {
     const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
+        getReviewsbyId()
         console.log(values);
     } 
     
