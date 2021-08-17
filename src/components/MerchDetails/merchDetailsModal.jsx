@@ -42,11 +42,15 @@ const MerchDetails = (props) => {
       });
     };
   // });
+  function callTwoThings(){
+    handleShow();
+    getReviewsById();
+  }
  
 
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={callTwoThings}>
         Product Details
         </Button>
   
@@ -55,10 +59,7 @@ const MerchDetails = (props) => {
             <Modal.Title>Product Details</Modal.Title>
             
           </Modal.Header>
-          <Modal.Body>    
-          <Button 
-          onClick={getReviewsById}>Show Reviews
-          </Button>
+          <Modal.Body>   
           {/* {reviewsById.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
