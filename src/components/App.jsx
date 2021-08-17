@@ -22,6 +22,7 @@ import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
 import DisplayMerch from "./DisplayMerch/displayMerch";
 import MerchDetails from "./MerchDetails/merchDetailsModal";
 import Logout from "./Logout/logout";
+import ShoppingCart from "./DisplayCartModal/displayCartModal";
 
 class App extends Component {
   constructor(props) {
@@ -218,6 +219,7 @@ getReviewsbyId = async (merchid) => {
             {/* <ReviewForm userid={this.getUserInfo} /> */}
             <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
             <MerchModal />
+            <ShoppingCart />
             {/* <MerchDetails /> */}
           </Route>
 
