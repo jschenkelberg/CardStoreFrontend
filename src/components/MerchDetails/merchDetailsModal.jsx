@@ -10,6 +10,7 @@ const MerchDetails = (props) => {
     const [show, setShow] = useState(false);  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
+    const [loadData, setLoadData] = useState(true)
     const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
@@ -36,6 +37,7 @@ const MerchDetails = (props) => {
     const getReviewsById = async () => {
       var res = await axios(`https://localhost:44394/api/review/${props.item.merchId}`);
       var tempData=res.data;
+      setLoadData(false)
       console.log(res);
       return ({
         reviewsById: tempData,
@@ -44,10 +46,14 @@ const MerchDetails = (props) => {
   // });
   function callTwoThings(){
     handleShow();
-    getReviewsById();
   }
- 
+  useEffect(() => {
+    getReviewsById();
+    // console.log(reviewsById);
+  }, [loadData])
 
+  
+    
     return (
       <>
         <Button variant="primary" onClick={callTwoThings}>
@@ -59,8 +65,14 @@ const MerchDetails = (props) => {
             <Modal.Title>Product Details</Modal.Title>
             
           </Modal.Header>
-          <Modal.Body>   
-          {/* {reviewsById.map((review) => {
+          <Modal.Body>  
+          <h4>Name: {props.item.name}</h4>
+          <h4>Category: {props.item.category}</h4>
+          <h4>Description: {props.item.description}</h4>
+          <h4>Price: ${props.item.price}</h4> 
+          <h4></h4>
+          
+          {/* {productReviews.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
                                     <td>{review.userreview}</td>
@@ -106,6 +118,7 @@ const MerchDetails = (props) => {
       </>
     );
   }
+
 
 
   export default MerchDetails;

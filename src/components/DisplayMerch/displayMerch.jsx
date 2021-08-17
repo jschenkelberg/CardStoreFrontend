@@ -13,11 +13,10 @@ const DisplayMerch = (props) => {
         <React.Fragment>
             <h1>This is the displayMerch table</h1>
             <input
-                className="form-control"
                 placeholder="search..."
                 onChange={(event) => setSearch(event.target.value)}
               ></input>
-            <table>
+            <table className="table table-striped">
                 <thead>
                     <tr></tr>
                     <tr>

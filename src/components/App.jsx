@@ -245,7 +245,7 @@ getReviewsbyId = async (merchid) => {
           />
 
           {/* <TitleBar /> */}
-          <DisplayShoppingCart />
+          {/* <DisplayShoppingCart /> */}
           <Redirect to="not-found" />
         </Switch>
       </React.Fragment>
