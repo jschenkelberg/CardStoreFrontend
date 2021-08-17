@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import useForm from '../UseForm/useForm';
 import axios from 'axios';
+import useFormRating from '../UseForm/useFormRating';
 
 
 
@@ -10,14 +10,19 @@ const MerchDetails = (props) => {
     const [show, setShow] = useState(false);  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
-    const{values, handleChange, handleSubmit} = useForm(merchDetails);
+    const [loadData, setLoadData] = useState(true)
+    const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
+        getReviewsById()
         console.log(values);
     } 
+    
+ 
 
-    const addReview = async (review) => {
+    const addReview = async () => {
       const jwt =localStorage.getItem("token");
+      const review={merchId:props.item.merchId, userReview: values.userreview, rating: values.rating}
       const res = await axios.post(`https://localhost:44394/api/review`,
    review, {headers: { Authorization: "Bearer " + jwt },
   })
@@ -26,25 +31,62 @@ const MerchDetails = (props) => {
       // this.props.getMerch(merchId)
   })
   .catch(err => console.log(err))    
-  };           
+  };
+  
+  // useEffect(() => {
+    const getReviewsById = async () => {
+      var res = await axios(`https://localhost:44394/api/review/${props.item.merchId}`);
+      var tempData=res.data;
+      setLoadData(false)
+      console.log(res);
+      return ({
+        reviewsById: tempData,
+      });
+    };
+  // });
+  function callTwoThings(){
+    handleShow();
+  }
+  useEffect(() => {
+    getReviewsById();
+    // console.log(reviewsById);
+  }, [loadData])
 
+  
+    
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={callTwoThings}>
         Product Details
         </Button>
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header>
             <Modal.Title>Product Details</Modal.Title>
+            
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body>  
+          <h4>Name: {props.item.name}</h4>
+          <h4>Category: {props.item.category}</h4>
+          <h4>Description: {props.item.description}</h4>
+          <h4>Price: ${props.item.price}</h4> 
+          <h4></h4>
+          
+          {/* {productReviews.map((review) => {
+                            return(                                
+                                <tr key={review.merchId}>
+                                    <td>{review.userreview}</td>
+                                    <td>{review.rating}</td>                                 
+                                </tr>
+                            )
+                        })
+                    } */}
 
           <form className="form-inline" onSubmit={handleSubmit}>
-        <h2>Add Review</h2>
+        <h6>Add Review</h6>
         <br />
         <div className="form-group">
-        
+
         <input
           type="text"
           name="userreview"
@@ -76,6 +118,7 @@ const MerchDetails = (props) => {
       </>
     );
   }
+
 
 
   export default MerchDetails;

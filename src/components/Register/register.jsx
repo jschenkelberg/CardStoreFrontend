@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import useForm from "../UseForm/useForm";
 
 const Register = (props) => {
   const { values, handleChange, handleSubmit } = useForm(create);
-  const [ redirect, setRedirect] = useState(false);
+  const[willRedirect, setWillRedirect] = useState(false);
+  // const [redirect, setRedirect] = useState(false);
+
   function create() {
     props.newUser(values);
     console.log(values);
-    setRedirect(true);
+    setWillRedirect(true);    
+    
+    
   }
-  
-  return (
+if(willRedirect===false){
+  return (    
     <div>
       <div>
         <div className="row row-spacer">
@@ -101,7 +105,12 @@ const Register = (props) => {
         </form>
       </div>
     </div>
+    
+    
   );
+}
+  else{
+    return <Redirect to="/login"/>}  
 };
 
 export default Register;

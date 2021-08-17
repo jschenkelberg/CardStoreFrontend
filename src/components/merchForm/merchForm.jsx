@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import "./merchForm.css";
 import axios from "axios";
 
@@ -15,15 +15,16 @@ class MerchForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
 
   addMerch = async (merch) => {
     const jwt = localStorage.getItem("token");
-    const res = await axios
+    const response = await axios
       .post(`https://localhost:44394/api/merches`, merch,{
         headers: { Authorization: "Bearer " + jwt },
       })
-      .then((res) => {
-        console.log(res);
+      .then((response) => {
+        console.log(response);
       
         // this.props.getMerch(merchId)
         this.props.getAllItems()

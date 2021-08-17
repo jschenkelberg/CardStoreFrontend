@@ -1,8 +1,7 @@
-import { mapValues } from 'async';
 import React from 'react';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import useForm from '../UseForm/useForm';
+import useFormPrice from '../UseForm/useFormPrice';
 import axios from 'axios';
 
 
@@ -11,7 +10,7 @@ const MerchModal = (props) => {
     const [show, setShow] = useState(false);  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);   
-    const{values, handleChange, handleSubmit} = useForm(merchForm);
+    const{values, handleChange, handleSubmit} = useFormPrice(merchForm);
     function merchForm() {
         addMerch(values);
         console.log(values);
