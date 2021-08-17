@@ -35,9 +35,10 @@ class App extends Component {
       shoppingCart: [],
       items: [],
       userid: "",
-      reviews:[],
-      reviewsById:[],
-      redirect:null,
+      reviews: [],
+      reviewsById: [],
+      redirect: null,
+      isLoggedIn: false,
     };
   }
 
@@ -52,24 +53,20 @@ class App extends Component {
     } catch {}
   }
 
-getAllReviews = async () => {
-  var res = await axios (`https://localhost:44394/api/review`)  
-  //console.log(tempItem)
-  return(
-    this.setState({
-      reviews: res.data
-    })
-  );
-}
+  getAllReviews = async () => {
+    var res = await axios(`https://localhost:44394/api/review`);
+    //console.log(tempItem)
+    return this.setState({
+      reviews: res.data,
+    });
+  };
 
-getReviewsbyId = async (merchid) => {
-  var res = await axios (`https://localhost:44394/api/review`, merchid)
-  return(
-    this.setState({
-      reviewsById: res.data
-    })
-  );
-}
+  getReviewsbyId = async (merchid) => {
+    var res = await axios(`https://localhost:44394/api/review`, merchid);
+    return this.setState({
+      reviewsById: res.data,
+    });
+  };
 
   // tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
   getAllItems = async () => {
@@ -121,6 +118,7 @@ getReviewsbyId = async (merchid) => {
     this.getUserInfo();
     this.setState({
       user: res.data,
+      isLoggedIn: true,
     });
     console.log(res.data);
   };
@@ -193,49 +191,54 @@ getReviewsbyId = async (merchid) => {
 
     return (
       <React.Fragment>
-        <TitleBar />
-        <NavBar />
-
-        <Switch>
-          <Route path="/" exact component={Home}>
-            {/* <MerchForm
+        <NavBar isLoggedIn={this.state.isLoggedIn} />
+        {this.state.isLoggedIn == false ? (
+          <Login getUser={this.getUser}/>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Home}>
+              {/* <MerchForm
               userid={this.getUserInfo}
               getAllItems={this.getAllItems}
             /> */}
-            {/* <ReviewForm userid={this.getUserInfo} /> */}
-            <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
-            <MerchModal />
-            <ShoppingCart />
-            {/* <MerchDetails /> */}
-          </Route>
-
-          <Route
-            path="/login"
-            render={(props) => <Login {...props} getUser={this.getUser} />}
-          />
-          <Route
-            path="/login"
-            render={(props) => (
-              <Logout {...props} logoutUser={this.logoutUser} />
-            )}
-          />
-
-          <Route
-            path="/register"
-            render={(props) => (
-              <Register
-                {...props}
-                newUser={this.newUser}
-                Redirect
-                to="/login"
+              {/* <ReviewForm userid={this.getUserInfo} /> */}
+              <DisplayMerch
+                items={this.state.items}
+                addToCart={this.addToCart}
               />
-            )}
-          />
+              <MerchModal />
+              <ShoppingCart />
+              {/* <MerchDetails /> */}
+            </Route>
 
-        
-          {/* <DisplayShoppingCart /> */}
-          <Redirect to="not-found" />
-        </Switch>
+            <Route
+              path="/login"
+              render={(props) => <Login {...props} getUser={this.getUser} />}
+            />
+            <Route
+              path="/login"
+              render={(props) => (
+                <Logout {...props} logoutUser={this.logoutUser} />
+              )}
+            />
+
+            <Route
+              path="/register"
+              render={(props) => (
+                <Register
+                  {...props}
+                  newUser={this.newUser}
+                  Redirect
+                  to="/login"
+                />
+              )}
+            />
+
+            
+            {/* <DisplayShoppingCart /> */}
+            <Redirect to="not-found" />
+          </Switch>
+        )}
       </React.Fragment>
     );
   }
