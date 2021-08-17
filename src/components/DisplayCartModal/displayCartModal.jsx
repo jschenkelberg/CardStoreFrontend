@@ -15,14 +15,18 @@ const ShoppingCart = (props) => {
 
   // useEffect(() => {
     const getCart = async () => {
-      var res = await axios(`https://localhost:44394/api/shoppingcart`);
-      setLoadData(false)
+      const jwt = localStorage.getItem("token");
+      var res = await axios.get(`https://localhost:44394/api/shoppingcart`, {
+        headers: { Authorization: "Bearer " + jwt },
+      });
+      setLoadData(false);
       console.log(res);
-      setCart(res.data)
+      setCart(res.data);
     };
   // });
   function callTwoThings(){
     handleShow();
+    getCart();
   }
   useEffect(() => {
     getCart();
@@ -53,7 +57,7 @@ const ShoppingCart = (props) => {
               return(
                 <tr key={cart.merchName}>
                   <td>{cart.merchName}</td>
-                  <td>{cart.merchPrice}</td>
+                  <td>${cart.merchPrice}</td>
                 </tr>
                 )
               })

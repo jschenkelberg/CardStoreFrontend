@@ -8,12 +8,9 @@ const DisplayShoppingCart = (props) => {
                 <thead>
                     <tr></tr>
                     <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Description</th>
+                    <th>Name</th>                   
                     <th>Price</th>
-                    <th>Reviews</th>
-                    <th>Raiting</th>
+                    
                     </tr>
                     <tr></tr>
                 </thead>
@@ -22,12 +19,7 @@ const DisplayShoppingCart = (props) => {
                         props.shoppingCart.map((item) => {
                             return(
                                 <tr key={item.merchId}>
-                                    <td>{item.userId}</td>
-                                    <td>{item.merchId}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.price}</td>
-                                    <td>not done</td>
-                                    <td>not done</td>
+                                    <td>{item.userId}</td>                            
                                 </tr>
                             )
                         })

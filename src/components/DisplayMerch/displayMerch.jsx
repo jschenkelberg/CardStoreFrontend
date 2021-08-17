@@ -11,7 +11,7 @@ const DisplayMerch = (props) => {
   );
     return (
         <React.Fragment>
-            <h1>This is the displayMerch table</h1>
+            <h1>Cards for Sale</h1>
             <input
                 placeholder="search..."
                 onChange={(event) => setSearch(event.target.value)}
@@ -36,7 +36,7 @@ const DisplayMerch = (props) => {
                                     <td>{item.name}</td>
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>
-                                    <td>{item.price}</td>
+                                    <td>${item.price}</td>
                                     <td>
                                         <button onClick={() => props.addToCart(item)}>Add to Cart</button>
                                     </td>

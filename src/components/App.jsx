@@ -14,8 +14,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import jwtDecode, { InvalidTokenError } from "jwt-decode";
-import MerchForm from "./merchForm/merchForm";
-import ReviewForm from "./reviewForm/reviewForm";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import MerchModal from "./Modal/addItemModal";
 import DisplayShoppingCart from "./DisplayShoppingCart/displayShoppingCart";
@@ -146,28 +145,14 @@ getReviewsbyId = async (merchid) => {
       })
       .then((res) => {
         console.log(res);
-        // this.props.getMerch(merchId)
+        
       })
       .catch((err) => console.log(err));
   };
 
   
 
-  // this is also in merchForm, this was coppied to the modal version
-  // addMerch = async (event) => {
-  //   const jwt = localStorage.getItem("token");
-  //   const res = await axios.post(
-  //     `https://localhost:44394/api/merches`, event,{
-  //       headers: { Authorization: "Bearer " + jwt },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
 
-  //       // this.props.getMerch(merchId)
-  //     })
-
-  //     // .catch((err) => console.log(err));
-  // };
 
   // shopping cart functions
   // add item to cart with "add to cart button"
@@ -208,6 +193,7 @@ getReviewsbyId = async (merchid) => {
 
     return (
       <React.Fragment>
+        <TitleBar />
         <NavBar />
 
         <Switch>
@@ -246,7 +232,7 @@ getReviewsbyId = async (merchid) => {
             )}
           />
 
-          {/* <TitleBar /> */}
+        
           {/* <DisplayShoppingCart /> */}
           <Redirect to="not-found" />
         </Switch>
