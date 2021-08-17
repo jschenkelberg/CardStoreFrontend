@@ -1,14 +1,19 @@
 import React from "react";
+import { useState } from "react";
+import { Redirect } from "react-router";
 import useForm from "../UseForm/useFormRating";
 
 
 
 const Login = (props) => { 
   const{values, handleChange, handleSubmit} = useForm(loginUser);
+  const [willRedirect, setWillRedirect]= useState(false)
   function loginUser() {
     props.getUser(values);
     console.log(values);
+    setWillRedirect(true);
   }
+  if(willRedirect===false){
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit} className="col-md-2">
@@ -45,6 +50,9 @@ const Login = (props) => {
       </form>
     </React.Fragment>
   );
+}
+else{
+  return <Redirect to="/"/>}
 };
 
 export default Login;

@@ -226,7 +226,7 @@ getReviewsbyId = async (merchid) => {
             render={(props) => <Login {...props} getUser={this.getUser} />}
           />
           <Route
-            path="/logout"
+            path="/login"
             render={(props) => (
               <Logout {...props} logoutUser={this.logoutUser} />
             )}

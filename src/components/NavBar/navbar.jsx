@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
+  const handleMenuClose = () => {
+    localStorage.removeItem('token');
+    window.location.href ='/login'
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,7 +29,11 @@ const NavBar = (props) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/logout" className="nav-link active">
+              <Link
+                to="/login"
+                className="nav-link active"
+                onClick={handleMenuClose}
+              >
                 Log Out
               </Link>
             </li>
