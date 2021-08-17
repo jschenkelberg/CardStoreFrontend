@@ -36,10 +36,11 @@ class App extends Component {
       items: [],
       userid: "",
       reviews:[],
+      reviewsById:[],
       redirect:null,
     };
   }
-  
+
   componentDidMount() {
     this.getAllItems();
     this.getAllReviews();
@@ -52,8 +53,7 @@ class App extends Component {
   }
 
 getAllReviews = async () => {
-  var res = await axios (`https://localhost:44394/api/review`)
-  var tempItem = res.data
+  var res = await axios (`https://localhost:44394/api/review`)  
   //console.log(tempItem)
   return(
     this.setState({
@@ -62,9 +62,14 @@ getAllReviews = async () => {
   );
 }
 
-// filterReviews = this.reviews
-//   .filter(function (review){
-//     return review.merchid == this.reviews.merchid)
+getReviewsbyId = async (merchid) => {
+  var res = await axios (`https://localhost:44394/api/review`, merchid)
+  return(
+    this.setState({
+      reviewsById: res.data
+    })
+  );
+}
 
   // tested but hard coded userId, gets shopping cart by userId, this needs to then have the merchId's filtered.
   getAllItems = async () => {

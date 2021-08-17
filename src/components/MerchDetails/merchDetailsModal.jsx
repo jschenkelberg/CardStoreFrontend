@@ -42,18 +42,9 @@ const MerchDetails = (props) => {
             <Modal.Title>Product Details</Modal.Title>
             
           </Modal.Header>
-          <Modal.Body>
-          {/* <div>
-            ID {props.item.merchId}
-            </div> 
-            <div>
-            Description {props.item.description}
-            </div>
-            <div>
-            Price ${props.item.price}
-          </div> */}
-          {/* {
-                        props.reviews.map((review) => {
+          <Modal.Body>    
+          <Button onClick ={props.getReviewById}>
+          {/* {props.reviewsById.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
                                     <td>{review.userreview}</td>
@@ -61,8 +52,8 @@ const MerchDetails = (props) => {
                                 </tr>
                             )
                         })
-                    }
- */}
+                    } */}
+</Button>
 
           <form className="form-inline" onSubmit={handleSubmit}>
         <h6>Add Review</h6>
