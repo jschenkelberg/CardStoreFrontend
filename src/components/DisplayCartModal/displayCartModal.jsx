@@ -51,6 +51,7 @@ const ShoppingCart = (props) => {
                   <tr key={cart.merchName}>
                     <td>{cart.merchName}</td>
                     <td>${cart.merchPrice}</td>
+                    <Button>Remove from cart</Button>
                   </tr>
                 );
               })}
@@ -58,6 +59,7 @@ const ShoppingCart = (props) => {
           </table>
         </Modal.Body>
         <Modal.Footer>
+          <Button>Checkout</Button>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
