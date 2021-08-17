@@ -65,7 +65,7 @@ if(willRedirect===false){
           <div className="form-floating">
             <input
               name="Password"
-              type="string"
+              type="Password"
               className="form-control"
               placeholder="112234344rrttyyuu"
               onChange={handleChange}
