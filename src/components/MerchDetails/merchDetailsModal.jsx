@@ -13,7 +13,7 @@ const MerchDetails = (props) => {
     const{values, handleChange, handleSubmit} = useFormRating(merchDetails);
     function merchDetails() {
         addReview(values);
-        getReviewsbyId()
+        getReviewsById()
         console.log(values);
     } 
     
@@ -33,11 +33,12 @@ const MerchDetails = (props) => {
   };
   
   // useEffect(() => {
-    const getReviewsbyId = async () => {
-      var res = await axios(`https://localhost:44394/api/review/${props.item.merchid}`);
+    const getReviewsById = async () => {
+      var res = await axios(`https://localhost:44394/api/review/${props.item.merchId}`);
+      var tempData=res.data;
       console.log(res);
-      return this.setState({
-        reviewsById: res.data,
+      return ({
+        reviewsById: tempData,
       });
     };
   // });
@@ -55,8 +56,10 @@ const MerchDetails = (props) => {
             
           </Modal.Header>
           <Modal.Body>    
-          <Button onClick={props.getReviewsById}>
-          {/* {this.reviewsById.map((review) => {
+          <Button 
+          onClick={getReviewsById}>Show Reviews
+          </Button>
+          {/* {reviewsById.map((review) => {
                             return(                                
                                 <tr key={review.merchId}>
                                     <td>{review.userreview}</td>
@@ -65,7 +68,6 @@ const MerchDetails = (props) => {
                             )
                         })
                     } */}
-</Button>
 
           <form className="form-inline" onSubmit={handleSubmit}>
         <h6>Add Review</h6>

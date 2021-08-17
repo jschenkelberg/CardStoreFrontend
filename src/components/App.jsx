@@ -150,6 +150,8 @@ getReviewsbyId = async (merchid) => {
       .catch((err) => console.log(err));
   };
 
+  
+
   // this is also in merchForm, this was coppied to the modal version
   // addMerch = async (event) => {
   //   const jwt = localStorage.getItem("token");
@@ -214,9 +216,9 @@ getReviewsbyId = async (merchid) => {
               getAllItems={this.getAllItems}
             /> */}
             {/* <ReviewForm userid={this.getUserInfo} /> */}
-            <DisplayMerch items={this.state.items} addToCart={this.addToCart} />
+            <DisplayMerch items={this.state.items} addToCart={this.addToCart}/>
             <MerchModal />
-            <MerchDetails />
+            {/* <MerchDetails /> */}
           </Route>
 
           <Route
